@@ -7,42 +7,67 @@ import { navLinks, eventMeta } from '@/lib/constants';
 import FrostbyteLogo from '@/components/FrostbyteLogo';
 
 export default function Navbar() {
-  const [navState, setNavState] = useState<'initial' | 'hidden' | 'content'>('initial');
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const updateScroll = () => {
+      const currentScrollY = Math.max(0, window.scrollY);
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+      // Handle transparent vs solid backdrop styling
+      setIsScrolled(currentScrollY > 40);
+
+      // Always show at top of page
+      if (currentScrollY <= 40) {
+        setIsVisible(true);
+      } else if (!mobileOpen && currentScrollY <= maxScroll) {
+        const delta = currentScrollY - lastScrollY;
+        // 8px threshold to ignore micro-scroll jitter
+        if (delta > 8) {
+          // Scrolling down -> remove nav
+          setIsVisible(false);
+        } else if (delta < -8) {
+          // Scrolling up -> bring nav back
+          setIsVisible(true);
+        }
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
     const onScroll = () => {
-      const y = window.scrollY;
-      // Scenery transition covers ~225vh
-      const transitionEnd = window.innerHeight * 2.15;
-      if (y < 40) {
-        setNavState('initial');
-      } else if (y < transitionEnd) {
-        setNavState('hidden');
-      } else {
-        setNavState('content');
+      if (!ticking) {
+        window.requestAnimationFrame(updateScroll);
+        ticking = true;
       }
     };
 
-    onScroll();
+    updateScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, []);
+  }, [mobileOpen]);
 
   const closeMobile = () => setMobileOpen(false);
+  const showNav = isVisible || mobileOpen;
 
   return (
     <header
       style={{
-        transform: navState === 'hidden' ? 'translateY(-100%)' : 'translateY(0)',
+        transform: showNav ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s, border-color 0.25s',
       }}
       className={`fixed top-0 left-0 right-0 z-50 ${
-        navState === 'content'
+        isScrolled
           ? 'bg-[#171F2D]/90 backdrop-blur-md border-b-2 border-[#53647B] shadow-[0_4px_0_rgba(0,0,0,0.4)]'
           : 'bg-transparent border-b-2 border-transparent'
       }`}
