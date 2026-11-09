@@ -6,6 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
@@ -20,9 +21,39 @@
   flex-shrink: 0;
   /* Shared coordinate system with base aspect ratio 2752 / 1536 */
   width: max(100vw, calc(100vh * 2752 / 1536));
+  width: max(100vw, calc(100dvh * 2752 / 1536));
   height: max(100vh, calc(100vw * 1536 / 2752));
+  height: max(100dvh, calc(100vw * 1536 / 2752));
   aspect-ratio: 2752 / 1536;
   overflow: visible;
+  transition: transform 0.2s ease-out;
+}
+
+/* Responsive framing for .scenery-container:
+   Synchronously repositions all 4 full-width layers and the campfire layer,
+   guaranteeing 100% layer alignment and parallax integrity without tearing or desync. */
+@media (max-width: 640px) {
+  .scenery-container {
+    transform: translateX(5.2%);
+  }
+}
+
+@media (max-width: 380px) {
+  .scenery-container {
+    transform: translateX(5.8%);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .scenery-container {
+    transform: translateX(2.5%);
+  }
+}
+
+@media (min-width: 1025px) {
+  .scenery-container {
+    transform: none;
+  }
 }
 
 /* Individual Layer Styling */
@@ -49,39 +80,71 @@
   left: 0;
   width: 100%;
   height: 50%;
-  z-index: 3; /* Matches campsite; foreground at z-4 visually passes in front */
+  z-index: 2; /* Matches campsite; foreground at z-4 visually passes in front */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: clamp(5.5rem, 12vh, 7.5rem);
+  padding-top: clamp(4.5rem, 10vh, 7.5rem);
   pointer-events: none;
-  /* background: linear-gradient(90deg, #6D9EFF, #D65BFF); */
+}
+
+/* Ensure the title layer remains strictly centered relative to the mobile/tablet viewport.
+   Since .scenery-container is shifted on mobile/tablet to frame the campsite scenery,
+   .scenery-layer-title counter-shifts by the exact opposite offset to stay 100% centered in the viewport. */
+@media (max-width: 640px) {
+  .scenery-layer-title {
+    left: -5.2%;
+  }
+}
+
+@media (max-width: 380px) {
+  .scenery-layer-title {
+    left: -5.8%;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .scenery-layer-title {
+    left: -2.5%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .scenery-layer-title {
+    left: 0;
+  }
 }
 
 .scenery-title {
   font-family: var(--font-pixel, monospace);
   font-weight: 700;
-  /* background: linear-gradient(90deg, #6D9EFF, #D65BFF); */
+  font-size: clamp(1.75rem, 7.2vw, 6rem);
   color: #F5F7FA;
   text-shadow:
     4px 4px 0 #0B0E14,
     -2px -2px 0 #0B0E14,
     2px -2px 0 #0B0E14,
     -2px 2px 0 #0B0E14;
-  letter-spacing: 0.12em;
+  letter-spacing: clamp(0.04em, 1.4vw, 0.12em);
+  text-indent: clamp(0.04em, 1.4vw, 0.12em);
   text-align: center;
   user-select: none;
+  max-width: 92vw;
+  word-break: break-word;
 }
 
 .scenery-scroll-hint {
   font-family: var(--font-pixel, monospace);
-  font-size: 11px;
+  font-size: clamp(9px, 1.8vw, 11px);
   color: #A5AFBD;
-  letter-spacing: 0.25em;
+  letter-spacing: clamp(0.12em, 2vw, 0.25em);
+  text-indent: clamp(0.12em, 2vw, 0.25em);
   text-shadow: 2px 2px 0 #0B0E14;
-  margin-top: 1.25rem;
+  margin-top: clamp(0.75rem, 2vh, 1.25rem);
   user-select: none;
+  text-align: center;
+  max-width: 90vw;
 }
 
 /* Layer 4: Foreground Terrain (Calibrated base position) */
@@ -114,22 +177,22 @@
   z-index: 2;
 }
 
-.scenery-layer-campsite {
-  z-index: 3;
+.scenery-layer-title {
+  z-index: 3; /* Above distant forest, behind campsite & igloo */
 }
 
-.scenery-layer-title {
-  z-index: 2;
+.scenery-layer-campsite {
+  z-index: 4; /* In front of title layer (igloo & campsite trees cover title) */
 }
 
 .scenery-layer-campfire {
-  z-index: 4; /* Sits naturally on the campsite ground beside the boy */
+  z-index: 5; /* Sits naturally on the campsite ground beside the boy */
   height: 100%;
   pointer-events: none;
 }
 
 .scenery-layer-terrain {
-  z-index: 5; /* Visually passes in front of campsite, campfire and title */
+  z-index: 6; /* Visually passes in front of campsite, campfire and title */
 }
 
 /* Localized Campfire Wrapper (Anchored in shared 2752 × 1536 campsite space) */
@@ -138,8 +201,17 @@
   left: 33.10%;
   top: 46.52%;
   width: 23.52%;
-  aspect-ratio: 427 / 401;
+  aspect-ratio: 420 / 415;
   pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .campfire-wrapper {
+    /* Independently controllable while visually anchored beside the adventurer */
+    left: 33.10%;
+    top: 46.52%;
+    width: 23.52%;
+  }
 }
 
 /* Animated Pixel Art Campfire Image */

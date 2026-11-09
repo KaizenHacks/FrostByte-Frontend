@@ -24,7 +24,7 @@ export default function About() {
             </span>
           </div>
 
-          <h2 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
+          <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
             About {eventMeta.name}
           </h2>
 
@@ -47,7 +47,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="pixel-panel pixel-panel-hover p-6 flex flex-col justify-between"
+                className="pixel-panel pixel-panel-hover p-5 sm:p-6 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-10 h-10 bg-[#1C2536] border border-[#53647B] flex items-center justify-center text-[#6D9EFF] shadow-[2px_2px_0_#0D1117]">

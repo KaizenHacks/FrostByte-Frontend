@@ -21,7 +21,7 @@ export default function EventFormat() {
             </span>
           </div>
 
-          <h2 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
+          <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
             Event Format &amp; Quest Log
           </h2>
 
@@ -69,7 +69,7 @@ export default function EventFormat() {
                   </div>
 
                   {/* Mobile content */}
-                  <div className="md:hidden pl-6">
+                  <div className="md:hidden pl-3 sm:pl-6">
                     <TimelinePixelCard event={event} align="left" step={index + 1} />
                   </div>
 
@@ -104,7 +104,7 @@ function TimelinePixelCard({
 }) {
   return (
     <div
-      className={`pixel-panel pixel-panel-hover p-6 ${
+      className={`pixel-panel pixel-panel-hover p-4 sm:p-6 ${
         align === 'right' ? 'md:text-right' : 'text-left'
       }`}
     >
@@ -124,7 +124,7 @@ function TimelinePixelCard({
         {event.description}
       </p>
       <div
-        className={`mt-4 flex items-center gap-2.5 ${
+        className={`mt-4 flex flex-wrap items-center gap-2 sm:gap-2.5 ${
           align === 'right' ? 'md:justify-end' : 'justify-start'
         }`}
       >

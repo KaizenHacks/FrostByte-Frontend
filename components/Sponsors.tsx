@@ -7,8 +7,8 @@ import FrostbyteLogo from '@/components/FrostbyteLogo';
 
 const sizeClasses: Record<string, string> = {
   lg: 'w-60 h-28 sm:w-72 sm:h-32',
-  md: 'w-44 h-22 sm:w-52 sm:h-24',
-  sm: 'w-36 h-18 sm:w-40 sm:h-20',
+  md: 'w-44 h-24 sm:w-52 sm:h-24',
+  sm: 'w-36 h-20 sm:w-40 sm:h-20',
 };
 
 export default function Sponsors() {
@@ -29,7 +29,7 @@ export default function Sponsors() {
             </span>
           </div>
 
-          <h2 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
+          <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
             Sponsors &amp; Guild Partners
           </h2>
 
@@ -63,7 +63,7 @@ export default function Sponsors() {
                 {Array.from({ length: tier.slots }).map((_, slotIndex) => (
                   <div
                     key={slotIndex}
-                    className={`${sizeClasses[tier.size]} pixel-panel pixel-panel-hover flex flex-col items-center justify-center gap-2 group`}
+                    className={`${sizeClasses[tier.size]} max-w-full pixel-panel pixel-panel-hover flex flex-col items-center justify-center gap-2 group`}
                   >
                     <Shield className="w-5 h-5 text-[#53647B] group-hover:text-[#6D9EFF] transition-colors" />
                     <span className="font-pixel text-[9px] text-[#53647B] group-hover:text-[#A5AFBD] tracking-widest transition-colors uppercase">
@@ -84,14 +84,16 @@ export default function Sponsors() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <div className="pixel-panel inline-flex flex-col sm:flex-row items-center gap-4 p-5 sm:px-8 bg-[#171F2D]/95">
-            <FrostbyteLogo variant="badge" className="w-10 h-10 sm:w-11 sm:h-11" hoverGlow />
-            <span className="font-sans text-sm text-[#DCE3EA]">
-              Looking to support student innovation and recruit top tier engineering talent?
-            </span>
+          <div className="pixel-panel flex flex-col sm:flex-row items-center justify-between gap-4 p-5 sm:px-8 bg-[#171F2D]/95 max-w-2xl mx-auto text-center sm:text-left">
+            <div className="flex items-center gap-3">
+              <FrostbyteLogo variant="badge" className="w-10 h-10 sm:w-11 sm:h-11 shrink-0" hoverGlow />
+              <span className="font-sans text-sm text-[#DCE3EA]">
+                Looking to support student innovation and recruit top tier engineering talent?
+              </span>
+            </div>
             <a
               href={`mailto:${contactEmail}`}
-              className="pixel-btn-primary shrink-0"
+              className="pixel-btn-primary w-full sm:w-auto shrink-0 text-center"
             >
               Sponsor FROSTBYTE &rarr;
             </a>

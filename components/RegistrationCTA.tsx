@@ -14,7 +14,7 @@ export default function RegistrationCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.4 }}
-          className="pixel-panel p-8 sm:p-12 text-center bg-[#171F2D]/95 border-2 border-[#6D9EFF] shadow-[6px_6px_0_#0D1117] relative overflow-hidden"
+          className="pixel-panel p-6 sm:p-8 md:p-12 text-center bg-[#171F2D]/95 border-2 border-[#6D9EFF] shadow-[6px_6px_0_#0D1117] relative overflow-hidden"
         >
           {/* Subtle Corner Accents */}
           <div className="absolute top-2 left-2 w-2 h-2 bg-[#6D9EFF]" />
@@ -30,14 +30,14 @@ export default function RegistrationCTA() {
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Sparkles size={14} className="text-[#D65BFF]" />
-            <span className="font-pixel text-[10px] text-[#C2E1E8] tracking-widest uppercase">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 mb-4">
+            <Sparkles size={14} className="text-[#D65BFF] shrink-0" />
+            <span className="font-pixel text-[9px] sm:text-[10px] text-[#C2E1E8] tracking-widest uppercase">
               FINAL CALL FOR EXPEDITION CANDIDATES
             </span>
           </div>
 
-          <h2 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight leading-snug">
+          <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight leading-snug">
             Ready to Build Beyond the Ordinary?
           </h2>
 
@@ -50,21 +50,21 @@ export default function RegistrationCTA() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href={eventMeta.registrationUrl}
-              className="pixel-btn-primary w-full sm:w-auto text-sm py-3.5 px-8"
+              className="pixel-btn-primary w-full sm:w-auto text-sm py-3.5 px-8 text-center"
             >
               Apply for {eventMeta.name} &rarr;
             </a>
             <a
               href="#timeline"
-              className="pixel-btn-secondary w-full sm:w-auto text-sm py-3.5 px-6"
+              className="pixel-btn-secondary w-full sm:w-auto text-sm py-3.5 px-6 text-center"
             >
               Review Timeline
             </a>
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-2 text-xs text-[#A5AFBD] font-pixel text-[9px]">
-            <Terminal size={12} className="text-[#6D9EFF]" />
-            <span>APPLICATIONS CLOSING SOON // ALL REGIONS WELCOME</span>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-[#A5AFBD] font-pixel text-[8px] sm:text-[9px] text-center">
+            <Terminal size={12} className="text-[#6D9EFF] shrink-0" />
+            <span className="break-words">APPLICATIONS CLOSING SOON // ALL REGIONS WELCOME</span>
           </div>
         </motion.div>
       </div>

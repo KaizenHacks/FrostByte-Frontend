@@ -112,7 +112,7 @@ export default function Footer() {
             </p>
             <a
               href={`mailto:${contactEmail}`}
-              className="font-pixel text-xs text-[#6D9EFF] hover:text-[#C2E1E8] transition-colors inline-block"
+              className="font-pixel text-xs text-[#6D9EFF] hover:text-[#C2E1E8] transition-colors inline-block break-all"
             >
               {contactEmail}
             </a>
@@ -122,7 +122,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[#53647B]/40 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-[#53647B]/40 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <p className="font-pixel text-[9px] text-[#53647B] tracking-wider">
             &copy; 2025 {eventMeta.name}. ALL RIGHTS RESERVED.
           </p>

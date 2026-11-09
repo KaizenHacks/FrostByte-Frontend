@@ -61,7 +61,7 @@ export default function Hero() {
         <motion.h1
           custom={1}
           variants={fadeUp}
-          className="font-pixel text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#F5F7FA] drop-shadow-[0_4px_0_#0D1117]"
+          className="font-pixel text-3xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#F5F7FA] drop-shadow-[0_4px_0_#0D1117] max-w-full break-words"
         >
           {eventMeta.name}
         </motion.h1>

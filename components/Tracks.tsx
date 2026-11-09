@@ -39,7 +39,7 @@ export default function Tracks() {
             </span>
           </div>
 
-          <h2 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
+          <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
             Tracks &amp; Challenges
           </h2>
 
@@ -62,7 +62,7 @@ export default function Tracks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="pixel-panel pixel-panel-hover p-6 flex flex-col justify-between group"
+                className="pixel-panel pixel-panel-hover p-5 sm:p-6 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between">

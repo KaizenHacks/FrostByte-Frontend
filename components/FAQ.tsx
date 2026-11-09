@@ -29,7 +29,7 @@ export default function FAQ() {
             </span>
           </div>
 
-          <h2 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
+          <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
             Frequently Asked Questions
           </h2>
 
@@ -100,13 +100,13 @@ export default function FAQ() {
         </motion.div>
 
         {/* Support Callout */}
-        <div className="mt-10 pixel-badge inline-flex items-center gap-2.5 text-[#A5AFBD]">
-          <span className="w-2 h-2 bg-[#D65BFF]" />
-          <span>
+        <div className="mt-10 pixel-badge inline-flex flex-wrap items-center gap-2 sm:gap-2.5 text-[#A5AFBD] max-w-full">
+          <span className="w-2 h-2 bg-[#D65BFF] shrink-0" />
+          <span className="break-words">
             Have more questions? Send a transmission to{' '}
             <a
               href={`mailto:${contactEmail}`}
-              className="text-[#6D9EFF] hover:underline font-bold"
+              className="text-[#6D9EFF] hover:underline font-bold break-all"
             >
               {contactEmail}
             </a>

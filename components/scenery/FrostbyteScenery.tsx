@@ -9,10 +9,10 @@ import './frostbyte-scenery.css';
  * FROSTBYTE Pixel Art Scenery Asset Mapping:
  * Layer 1 (FAR SKY):           /scenery/farsky-clean.png     (z-index: 1, 2% parallax)
  * Layer 2 (DISTANT FOREST):    /scenery/farforest-clean.png  (z-index: 2, 7% parallax)
- * Layer 3 (MAIN CAMPSITE):     /scenery/campsite-clean.png   (z-index: 3, 16% parallax)
- * TITLE LAYER (FROSTBYTE):     Integrated HTML Title         (z-index: 3, 16% parallax locked with campsite)
- * Layer 4 (FOREGROUND TERRAIN):/scenery/foreground-clean.png (z-index: 4, 38-45% parallax, 1086x1448 extended height)
- * Layer 5 (CAMPFIRE):          /scenery/campfire-clean.png   (temporarily disabled)
+ * TITLE LAYER (FROSTBYTE):     Integrated HTML Title         (z-index: 3, above forest, behind campsite & igloo)
+ * Layer 3 (MAIN CAMPSITE):     /scenery/campsite-clean.png   (z-index: 4, 16% parallax, in front of title)
+ * Layer 5 (CAMPFIRE):          /scenes/Pixel-Art_Campfire_Flicker_Animation.gif (z-index: 5)
+ * Layer 4 (FOREGROUND TERRAIN):/scenery/foreground-clean.png (z-index: 6, 38-45% parallax)
  */
 export const SCENERY_LAYERS = {
   farSky: {
@@ -33,12 +33,12 @@ export const SCENERY_LAYERS = {
   foregroundTerrain: {
     src: '/scenery/foreground-clean.png',
     alt: 'FROSTBYTE Foreground Terrain — Rising snow-covered silhouette framing the content',
-    zIndex: 5,
+    zIndex: 6,
   },
   campfire: {
     src: '/scenes/Pixel-Art_Campfire_Flicker_Animation.gif',
     alt: 'FROSTBYTE Campfire — Glowing animated pixel-art campfire and logs at the campsite',
-    zIndex: 4,
+    zIndex: 5,
   },
 } as const;
 
@@ -168,7 +168,7 @@ export default function FrostbyteScenery() {
   }, []);
 
   // Extended cinematic duration: approximately 225vh of scroll distance
-  const D = Math.max(Math.round(viewportHeight * 2.25), 2200);
+  const D = Math.round(viewportHeight * 2.25);
 
   // Milestones along scroll distance:
   // 0–15%: Complete initial campsite composition. FROSTBYTE title clearly visible.
@@ -284,7 +284,21 @@ export default function FrostbyteScenery() {
           />
         </motion.div>
 
-        {/* ── Layer 3: Main Campsite (z-index: 3, 16% movement) ───────────── */}
+        {/* ── FROSTBYTE Title Layer (Above distant forest, behind campsite & igloo) ── */}
+        <motion.div
+          className="scenery-layer scenery-layer-title"
+          style={{ y: titleY, opacity: titleOpacity }}
+          aria-hidden="true"
+        >
+          <h1 className="scenery-title">
+            FROSTBYTE
+          </h1>
+          <div className="scenery-scroll-hint animate-pulse">
+            [SCROLL TO EXPLORE]
+          </div>
+        </motion.div>
+
+        {/* ── Layer 3: Main Campsite (z-index: 4, 16% movement) ───────────── */}
         <motion.div
           className="scenery-layer scenery-layer-campsite"
           style={{ y: campsiteY }}
@@ -299,26 +313,6 @@ export default function FrostbyteScenery() {
             decoding="async"
             draggable={false}
           />
-        </motion.div>
-
-        {/* ── FROSTBYTE Title Layer (Dedicated independent scrollspeed) ── */}
-        <motion.div
-          className="scenery-layer scenery-layer-title"
-          style={{ y: titleY, opacity: titleOpacity }}
-          aria-hidden="true"
-        >
-          {/* <div className="mb-3 sm:mb-4">
-            <FrostbyteLogo
-              variant="scenery"
-              glow
-            />
-          </div> */}
-          <h1 className="scenery-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
-            FROSTBYTE
-          </h1>
-          <div className="scenery-scroll-hint animate-pulse">
-            [SCROLL TO EXPLORE]
-          </div>
         </motion.div>
 
         {/* ── Layer 5: Campfire (Integrated animated campfire beside the boy) ── */}
