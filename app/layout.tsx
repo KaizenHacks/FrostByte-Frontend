@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Press_Start_2P, Pixelify_Sans, Geist } from 'next/font/google';
 import './globals.css';
+import SiteLoaderCover from '@/components/SiteLoaderCover';
+import SiteLoader from '@/components/SiteLoader';
 
 const pressStart2P = Press_Start_2P({
   weight: '400',
@@ -88,6 +90,8 @@ export default function RootLayout({
       className={`${pressStart2P.variable} ${pixelifySans.variable} ${geistSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#171F2D] text-[#F5F7FA] font-sans selection:bg-[#6D9EFF]/30 selection:text-[#F5F7FA]">
+        <SiteLoaderCover />
+        <SiteLoader />
         {children}
       </body>
     </html>

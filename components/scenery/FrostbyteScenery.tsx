@@ -3,7 +3,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from 'motion/react';
 import LightCurtainBackground from '@/components/LightCurtainBackground';
-import FrostbyteLogo from '@/components/FrostbyteLogo';
 import './frostbyte-scenery.css';
 
 /**
