@@ -78,17 +78,22 @@ export default function Navbar() {
           <a
             href="#hero"
             className="flex items-center gap-3 sm:gap-3.5 group py-1"
-            aria-label="FROSTBYTE Hackathon home"
+            aria-label="FROSTBYTE by KaizenHacks home"
           >
             <FrostbyteLogo
               variant="nav"
               hoverGlow
             />
-            <div className="flex items-center gap-2">
-              <span className="font-pixel text-base sm:text-lg tracking-wider text-[#F5F7FA] group-hover:text-[#6D9EFF] transition-colors">
-                {eventMeta.name}
+            <div className="flex flex-col justify-center">
+              <div className="flex items-center gap-2">
+                <span className="font-pixel text-base sm:text-lg tracking-wider text-[#F5F7FA] group-hover:text-[#6D9EFF] transition-colors">
+                  {eventMeta.name}
+                </span>
+                <span className="inline-block w-2 h-2 bg-[#D65BFF] animate-pulse shadow-[1px_1px_0_#0D1117]" />
+              </div>
+              <span className="font-pixel text-[8px] sm:text-[9px] text-[#A5AFBD] tracking-wider uppercase -mt-0.5">
+                by KaizenHacks
               </span>
-              <span className="inline-block w-2 h-2 bg-[#D65BFF] animate-pulse shadow-[1px_1px_0_#0D1117]" />
             </div>
           </a>
 
@@ -105,10 +110,10 @@ export default function Navbar() {
             ))}
             <div className="ml-3 pl-3 border-l border-[#53647B]/50">
               <a
-                href={eventMeta.registrationUrl}
+                href="#registration"
                 className="pixel-btn-primary"
               >
-                Register [ESC]
+                Registration
               </a>
             </div>
           </nav>
@@ -138,11 +143,16 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-3 px-4 py-3 border-t border-b border-[#53647B]/40 bg-[#141A26]">
               <FrostbyteLogo variant="badge" className="w-8 h-8" />
-              <div className="flex items-center gap-1.5">
-                <span className="font-pixel text-sm text-[#F5F7FA] tracking-wider">
-                  {eventMeta.name}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-pixel text-sm text-[#F5F7FA] tracking-wider">
+                    {eventMeta.name}
+                  </span>
+                  <span className="inline-block w-1.5 h-1.5 bg-[#D65BFF] animate-pulse" />
+                </div>
+                <span className="font-pixel text-[8px] text-[#A5AFBD] tracking-wider uppercase">
+                  by KaizenHacks
                 </span>
-                <span className="inline-block w-1.5 h-1.5 bg-[#D65BFF] animate-pulse" />
               </div>
             </div>
             <nav className="flex flex-col gap-1.5 p-4" aria-label="Mobile navigation">
@@ -159,11 +169,11 @@ export default function Navbar() {
               ))}
               <div className="pt-3 mt-1 border-t border-[#53647B]">
                 <a
-                  href={eventMeta.registrationUrl}
+                  href="#registration"
                   onClick={closeMobile}
                   className="pixel-btn-primary w-full text-center"
                 >
-                  Register Now
+                  Registration
                 </a>
               </div>
             </nav>

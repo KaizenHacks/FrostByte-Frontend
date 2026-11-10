@@ -5,7 +5,8 @@ import About from '@/components/About';
 import EventFormat from '@/components/EventFormat';
 import Tracks from '@/components/Tracks';
 import Sponsors from '@/components/Sponsors';
-import RegistrationCTA from '@/components/RegistrationCTA';
+import Community from '@/components/Community';
+import Registration from '@/components/Registration';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 
@@ -35,7 +36,8 @@ export default function Home() {
         <EventFormat />
         <Tracks />
         <Sponsors />
-        <RegistrationCTA />
+        <Community />
+        <Registration />
         <FAQ />
       </main>
 

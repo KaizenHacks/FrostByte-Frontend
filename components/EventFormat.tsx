@@ -22,13 +22,13 @@ export default function EventFormat() {
           </div>
 
           <h2 className="font-pixel text-xl sm:text-3xl md:text-4xl text-[#F5F7FA] tracking-tight">
-            Event Format &amp; Quest Log
+            Three-Day Event Format
           </h2>
 
           <div className="pixel-divider w-24 my-4" />
 
           <p className="font-sans text-base sm:text-lg text-[#DCE3EA] max-w-2xl leading-relaxed">
-            Engineered into two concentrated 12-hour building sprints (12 + 12 format), balancing relentless focus, restorative rest, and an electric final demo round.
+            A three-day high-intensity expedition structured for focus and execution. Final submissions happen on Day 02, followed by a dedicated Day 03 evaluation and results ceremony.
           </p>
         </motion.div>
 
@@ -134,7 +134,7 @@ function TimelinePixelCard({
         </span>
         <span className="pixel-badge inline-flex items-center gap-1.5 text-[#A5AFBD]">
           <Clock size={11} className="text-[#6D9EFF]" />
-          {event.time}
+          {event.tag}
         </span>
       </div>
     </div>

@@ -17,8 +17,8 @@ const fadeUp: Variants = {
 const metaItems = [
   { label: eventMeta.format, icon: Clock, tag: 'FORMAT' },
   { label: eventMeta.dates, icon: Calendar, tag: 'TIMING' },
-  { label: eventMeta.venue, icon: MapPin, tag: 'VENUE' },
-  { label: eventMeta.location, icon: Navigation, tag: 'REALM' },
+  { label: eventMeta.domain, icon: MapPin, tag: 'DOMAIN' },
+  { label: eventMeta.attribution, icon: Navigation, tag: 'HOST' },
 ];
 
 export default function Hero() {
@@ -52,7 +52,7 @@ export default function Hero() {
           className="mb-6 inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-[#171F2D]/90 border border-[#53647B] shadow-[2px_2px_0_#0D1117] backdrop-blur-sm"
         >
           <span className="font-pixel text-[10px] sm:text-xs text-[#C2E1E8] tracking-widest uppercase">
-            Quest 2025 // Winter Edition
+            {eventMeta.fullName} {`//`} {eventMeta.attribution}
           </span>
           <span className="inline-block w-1.5 h-1.5 bg-[#D65BFF]" />
         </motion.div>

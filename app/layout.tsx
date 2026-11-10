@@ -25,15 +25,19 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://frostbyte.tech'),
-  title: 'Frostbyte',
+  title: 'FROSTBYTE 2026 — by KaizenHacks',
   description:
-    'Frostbyte is a 24-hour winter student hackathon in Delhi, India. An immersive retro pixel-art technology adventure bringing developers, designers and innovators together.',
+    'FROSTBYTE by KaizenHacks is an immersive 3-day winter hackathon uniting developers to build web-based solutions through modern web development and agentic engineering.',
   keywords: [
-    'Frostbyte',
+    'FROSTBYTE',
+    'FROSTBYTE 2026',
+    'KaizenHacks',
+    'FROSTBYTE by KaizenHacks',
+    'web development hackathon',
+    'agentic engineering',
     'hackathon',
     'student hackathon',
     'winter hackathon',
-    'Delhi hackathon',
     'pixel art',
     'coding festival',
     'technology',
@@ -45,26 +49,26 @@ export const metadata: Metadata = {
     apple: '/logo/frostbyte_p5_transparent.png',
   },
   openGraph: {
-    title: 'Frostbyte',
+    title: 'FROSTBYTE 2026 — by KaizenHacks',
     description:
-      'A 24-hour winter student hackathon in Delhi, India. Experience an immersive pixel-art winter adventure.',
+      'Build web-based solutions through modern web development and agentic engineering. A 3-day winter hackathon organized by KaizenHacks.',
     type: 'website',
-    locale: 'en_IN',
-    siteName: 'Frostbyte',
+    locale: 'en_US',
+    siteName: 'FROSTBYTE by KaizenHacks',
     images: [
       {
         url: '/logo/frostbyte_p5_transparent.png',
         width: 1400,
         height: 1296,
-        alt: 'FROSTBYTE Emblem',
+        alt: 'FROSTBYTE by KaizenHacks Emblem',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Frostbyte',
+    title: 'FROSTBYTE 2026 — by KaizenHacks',
     description:
-      'A 24-hour winter student hackathon in Delhi, India.',
+      'Build web-based solutions through modern web development and agentic engineering. A 3-day winter hackathon organized by KaizenHacks.',
     images: ['/logo/frostbyte_p5_transparent.png'],
   },
   robots: {

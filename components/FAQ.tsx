@@ -36,7 +36,7 @@ export default function FAQ() {
           <div className="pixel-divider w-24 my-4" />
 
           <p className="font-sans text-base sm:text-lg text-[#DCE3EA]">
-            Crucial intelligence for your winter expedition into {eventMeta.name}.
+            Crucial intelligence for your winter expedition into {eventMeta.fullName} by KaizenHacks.
           </p>
         </motion.div>
 

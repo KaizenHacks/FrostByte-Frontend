@@ -2,13 +2,17 @@ import {
   navLinks,
   contactEmail,
   eventMeta,
+  kaizenHacksMeta,
+  communityMeta,
 } from '@/lib/constants';
 import FrostbyteLogo from '@/components/FrostbyteLogo';
 
-function XTwitterIcon({ className }: { className?: string }) {
+function GlobeIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" x2="22" y1="12" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
   );
 }
@@ -39,11 +43,20 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
-const socialLinks = [
-  { platform: 'Twitter / X', href: '#', icon: XTwitterIcon },
-  { platform: 'Instagram', href: '#', icon: InstagramIcon },
-  { platform: 'LinkedIn', href: '#', icon: LinkedInIcon },
-  { platform: 'GitHub', href: '#', icon: GitHubIcon },
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.93.55 3.73 1.51 5.27L2 22l4.98-1.59a9.86 9.86 0 005.06 1.41h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 17.8c-1.62 0-3.21-.43-4.61-1.26l-.33-.2-3.41 1.09 1.11-3.32-.22-.35A7.87 7.87 0 014.13 11.9c0-4.36 3.55-7.91 7.91-7.91 2.11 0 4.1.82 5.59 2.31 1.49 1.49 2.31 3.48 2.31 5.59 0 4.36-3.55 7.91-7.9 7.91zm4.33-5.93c-.24-.12-1.41-.7-1.63-.78-.22-.08-.37-.12-.53.12-.16.24-.61.78-.75.94-.14.16-.27.18-.51.06-.24-.12-1.02-.38-1.94-1.21-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.53-1.28-.73-1.75-.19-.46-.39-.4-.53-.41h-.45c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.62 4.15 3.67.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.41-.58 1.61-1.13.2-.55.2-1.03.14-1.13-.06-.1-.22-.16-.46-.28z" />
+    </svg>
+  );
+}
+
+const verifiedLinks = [
+  { platform: 'KaizenHacks Website', href: kaizenHacksMeta.website, icon: GlobeIcon },
+  { platform: 'Instagram', href: kaizenHacksMeta.instagram, icon: InstagramIcon },
+  { platform: 'LinkedIn', href: kaizenHacksMeta.linkedin, icon: LinkedInIcon },
+  { platform: 'GitHub', href: kaizenHacksMeta.github, icon: GitHubIcon },
+  { platform: 'WhatsApp Community', href: communityMeta.url, icon: WhatsAppIcon },
 ] as const;
 
 export default function Footer() {
@@ -51,28 +64,39 @@ export default function Footer() {
     <footer className="relative z-20 bg-[#171F2D]/85 backdrop-blur-sm border-t-2 border-[#53647B]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Column 1 — Brand */}
+          {/* Column 1 — Brand & Organizer */}
           <div>
             <div className="flex items-center gap-3.5">
               <FrostbyteLogo
                 variant="footer"
                 glow
               />
-              <span className="font-pixel text-xl sm:text-2xl text-[#F5F7FA]">
-                {eventMeta.name}
-              </span>
-              <span className="w-2.5 h-2.5 bg-[#6D9EFF] shadow-[1px_1px_0_#0D1117]" />
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="font-pixel text-xl sm:text-2xl text-[#F5F7FA]">
+                    {eventMeta.name}
+                  </span>
+                  <span className="w-2.5 h-2.5 bg-[#6D9EFF] shadow-[1px_1px_0_#0D1117]" />
+                </div>
+                <span className="font-pixel text-[9px] text-[#A5AFBD] tracking-wider uppercase">
+                  {eventMeta.attribution}
+                </span>
+              </div>
             </div>
+
             <p className="font-sans text-sm text-[#A5AFBD] mt-3 leading-relaxed max-w-sm">
-              {eventMeta.tagline} {eventMeta.description}
+              {eventMeta.tagline} {eventMeta.shortDescription}
             </p>
+
             <div className="mt-5 flex items-center gap-2.5">
-              {socialLinks.map((item) => {
+              {verifiedLinks.map((item) => {
                 const Icon = item.icon;
                 return (
                   <a
                     key={item.platform}
                     href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={item.platform}
                     className="p-2.5 bg-[#1C2536] border border-[#53647B] text-[#A5AFBD] hover:text-[#F5F7FA] hover:border-[#6D9EFF] shadow-[2px_2px_0_#0D1117] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
                   >
@@ -99,6 +123,14 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="#registration"
+                  className="font-pixel text-[10px] text-[#6D9EFF] hover:text-[#C2E1E8] uppercase tracking-wider transition-colors inline-block"
+                >
+                  &gt; Registration
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -108,7 +140,7 @@ export default function Footer() {
               [HQ_COMMUNICATION]
             </h3>
             <p className="font-sans text-sm text-[#A5AFBD] mb-2">
-              Inquiries, partnerships, and sponsorships:
+              Support, partnerships, and organizer transmissions:
             </p>
             <a
               href={`mailto:${contactEmail}`}
@@ -116,18 +148,43 @@ export default function Footer() {
             >
               {contactEmail}
             </a>
-            <p className="font-sans text-xs text-[#53647B] mt-4">
-              BASE_REALM: <span className="text-[#A5AFBD] font-semibold">{eventMeta.location}</span>
-            </p>
+
+            <div className="mt-4 pt-3 border-t border-[#53647B]/30 space-y-2">
+              <a
+                href={kaizenHacksMeta.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 p-2 bg-[#091F42]/80 border border-[#254B85]/60 hover:border-[#6D9EFF] transition-colors"
+                aria-label="KaizenHacks Official Website"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={kaizenHacksMeta.logo}
+                  alt="KaizenHacks Official Logo"
+                  width="110"
+                  height="30"
+                  className="h-6 w-auto object-contain"
+                />
+              </a>
+              <p className="font-sans text-xs text-[#53647B]">
+                ORGANIZER: <span className="text-[#A5AFBD] font-semibold">{kaizenHacksMeta.attribution}</span>
+              </p>
+              <p className="font-sans text-xs text-[#53647B]">
+                NETWORK: <span className="text-[#A5AFBD]">{kaizenHacksMeta.networkType}</span>
+              </p>
+              <p className="font-sans text-xs text-[#53647B]">
+                COMMUNITY: <a href={communityMeta.url} target="_blank" rel="noopener noreferrer" className="text-[#6D9EFF] hover:underline">WhatsApp Group &rarr;</a>
+              </p>
+            </div>
           </div>
         </div>
 
         <div className="border-t border-[#53647B]/40 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <p className="font-pixel text-[9px] text-[#53647B] tracking-wider">
-            &copy; 2025 {eventMeta.name}. ALL RIGHTS RESERVED.
+            &copy; {eventMeta.year} {eventMeta.name} &bull; {eventMeta.attribution}. ALL RIGHTS RESERVED.
           </p>
-          <p className="font-pixel text-[9px] text-[#6D9EFF]/70 tracking-widest">
-            ENGINEERED FOR BUILDERS // WINTER 2025
+          <p className="font-pixel text-[9px] text-[#6D9EFF]/70 tracking-widest uppercase">
+            GROW TOGETHER. BUILD INDEPENDENTLY. // {kaizenHacksMeta.name.toUpperCase()} {eventMeta.year}
           </p>
         </div>
       </div>
