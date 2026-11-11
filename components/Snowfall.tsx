@@ -68,14 +68,32 @@ export default function Snowfall() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let lastW = window.innerWidth;
+    let lastH = window.innerHeight;
+
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      particlesRef.current = createParticles(canvas.width, canvas.height);
+      if (!canvas) return;
+      const curW = window.innerWidth;
+      const curH = window.innerHeight;
+
+      // Ignore mobile address bar expansion/collapse (< 150px vertical fluctuation)
+      if (Math.abs(curW - lastW) === 0 && Math.abs(curH - lastH) < 150) {
+        return;
+      }
+
+      lastW = curW;
+      lastH = curH;
+      canvas.width = curW;
+      canvas.height = curH;
+      particlesRef.current = createParticles(curW, curH);
     };
 
-    resize();
-    window.addEventListener('resize', resize);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particlesRef.current = createParticles(canvas.width, canvas.height);
+
+    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('orientationchange', resize, { passive: true });
 
     let elapsed = 0;
 

@@ -117,13 +117,19 @@ function StarTwinkleCanvas() {
 
     render();
 
+    let lastW = window.innerWidth;
     const onResize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight * 0.5;
+      const curW = window.innerWidth;
+      // Ignore mobile address bar expansion/collapse
+      if (Math.abs(curW - lastW) > 0) {
+        lastW = curW;
+        width = canvas.width = curW;
+        height = canvas.height = window.innerHeight * 0.5;
+      }
     };
 
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', onResize);
@@ -155,16 +161,39 @@ export default function FrostbyteScenery() {
   const reducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
 
-  // Track responsive viewport height for proportional travel calculations
+  // Track responsive viewport height for proportional travel calculations.
+  // Initialized to window.innerHeight if available (or 1080 SSR default).
   const [viewportHeight, setViewportHeight] = useState(1080);
 
   useEffect(() => {
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+
     const updateDims = () => {
-      setViewportHeight(window.innerHeight);
+      const curWidth = window.innerWidth;
+      const curHeight = window.innerHeight;
+
+      // On mobile devices, scrolling down or up toggles the browser's URL address bar,
+      // changing innerHeight by 50-100px while innerWidth remains identical.
+      // We ignore these vertical-only address bar fluctuations to prevent
+      // re-rendering, recalculating travel distances, and causing jerky scale changes!
+      const widthChanged = Math.abs(curWidth - lastWidth) > 0;
+      const heightChangedSignificantly = Math.abs(curHeight - lastHeight) > 150;
+
+      if (widthChanged || heightChangedSignificantly) {
+        lastWidth = curWidth;
+        lastHeight = curHeight;
+        setViewportHeight(curHeight);
+      }
     };
+
     updateDims();
-    window.addEventListener('resize', updateDims);
-    return () => window.removeEventListener('resize', updateDims);
+    window.addEventListener('resize', updateDims, { passive: true });
+    window.addEventListener('orientationchange', updateDims, { passive: true });
+    return () => {
+      window.removeEventListener('resize', updateDims);
+      window.removeEventListener('orientationchange', updateDims);
+    };
   }, []);
 
   // Extended cinematic duration: approximately 225vh of scroll distance
@@ -212,31 +241,33 @@ export default function FrostbyteScenery() {
     finalFg,                    // 80–100%: deep foreground snow terrain fills the entire viewport
   ];
 
-  // Integer-pixel snapped transform translations
+  // Integer-pixel snapped transform translations.
+  // Math.max(0, v) prevents mobile top elastic overscroll (rubber-banding negative values) from displacing layers.
   const skyY = useTransform(
     scrollY,
-    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(v, scrollKeys, skyVals))}px`)
+    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(Math.max(0, v), scrollKeys, skyVals))}px`)
   );
   const forestY = useTransform(
     scrollY,
-    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(v, scrollKeys, forestVals))}px`)
+    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(Math.max(0, v), scrollKeys, forestVals))}px`)
   );
   const campsiteY = useTransform(
     scrollY,
-    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(v, scrollKeys, campsiteVals))}px`)
+    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(Math.max(0, v), scrollKeys, campsiteVals))}px`)
   );
   const titleY = useTransform(
     scrollY,
-    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(v, scrollKeys, titleVals))}px`)
+    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(Math.max(0, v), scrollKeys, titleVals))}px`)
   );
   const titleOpacity = useTransform(
     scrollY,
     [0, 0.20 * D, 0.60 * D],
-    [1, 1, 0]
+    [1, 1, 0],
+    { clamp: true }
   );
   const foregroundY = useTransform(
     scrollY,
-    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(v, scrollKeys, fgVals))}px`)
+    (v) => (reducedMotion ? '0px' : `${Math.round(interpolateSegment(Math.max(0, v), scrollKeys, fgVals))}px`)
   );
 
   return (

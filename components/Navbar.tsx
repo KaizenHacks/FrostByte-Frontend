@@ -121,7 +121,7 @@ export default function Navbar() {
           {/* Mobile hamburger button */}
           <button
             type="button"
-            className="inline-flex items-center justify-center p-2 bg-[#171F2D] border-2 border-[#53647B] text-[#DCE3EA] hover:border-[#6D9EFF] md:hidden shadow-[2px_2px_0_#0D1117] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            className="inline-flex items-center justify-center p-2 min-w-[44px] min-h-[44px] bg-[#171F2D] border-2 border-[#53647B] text-[#DCE3EA] hover:border-[#6D9EFF] md:hidden shadow-[2px_2px_0_#0D1117] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileOpen}

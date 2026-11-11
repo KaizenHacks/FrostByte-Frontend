@@ -91,9 +91,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pressStart2P.variable} ${pixelifySans.variable} ${geistSans.variable} h-full antialiased`}
+      className={`${pressStart2P.variable} ${pixelifySans.variable} ${geistSans.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#171F2D] text-[#F5F7FA] font-sans selection:bg-[#6D9EFF]/30 selection:text-[#F5F7FA]">
+      <body className="min-h-screen flex flex-col bg-[#171F2D] text-[#F5F7FA] font-sans selection:bg-[#6D9EFF]/30 selection:text-[#F5F7FA]">
         <SiteLoaderCover />
         <SiteLoader />
         {children}

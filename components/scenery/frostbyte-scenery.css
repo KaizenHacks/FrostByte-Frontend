@@ -4,9 +4,11 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
-  height: 100dvh;
+  height: 100lvh;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
@@ -19,14 +21,14 @@
 .scenery-container {
   position: relative;
   flex-shrink: 0;
-  /* Shared coordinate system with base aspect ratio 2752 / 1536 */
+  /* Shared coordinate system with base aspect ratio 2752 / 1536.
+     Uses 100lvh / 100vh to maintain stable dimensions that do NOT resize during mobile scroll. */
   width: max(100vw, calc(100vh * 2752 / 1536));
-  width: max(100vw, calc(100dvh * 2752 / 1536));
+  width: max(100vw, calc(100lvh * 2752 / 1536));
   height: max(100vh, calc(100vw * 1536 / 2752));
-  height: max(100dvh, calc(100vw * 1536 / 2752));
+  height: max(100lvh, calc(100vw * 1536 / 2752));
   aspect-ratio: 2752 / 1536;
   overflow: visible;
-  transition: transform 0.2s ease-out;
 }
 
 /* Responsive framing for .scenery-container:
@@ -80,7 +82,7 @@
   left: 0;
   width: 100%;
   height: 50%;
-  z-index: 2; /* Matches campsite; foreground at z-4 visually passes in front */
+  z-index: 3; /* Above distant forest, behind campsite & igloo */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,19 +121,20 @@
 .scenery-title {
   font-family: var(--font-pixel, monospace);
   font-weight: 700;
-  font-size: clamp(1.75rem, 7.2vw, 6rem);
+  font-size: clamp(1.4rem, 6.6vw, 6rem);
   color: #F5F7FA;
   text-shadow:
     4px 4px 0 #0B0E14,
     -2px -2px 0 #0B0E14,
     2px -2px 0 #0B0E14,
     -2px 2px 0 #0B0E14;
-  letter-spacing: clamp(0.04em, 1.4vw, 0.12em);
-  text-indent: clamp(0.04em, 1.4vw, 0.12em);
+  letter-spacing: clamp(0.04em, 1.2vw, 0.12em);
+  text-indent: clamp(0.04em, 1.2vw, 0.12em);
   text-align: center;
   user-select: none;
-  max-width: 92vw;
-  word-break: break-word;
+  max-width: 90vw;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 
 .scenery-scroll-hint {
@@ -145,6 +148,7 @@
   user-select: none;
   text-align: center;
   max-width: 90vw;
+  white-space: nowrap;
 }
 
 /* Layer 4: Foreground Terrain (Calibrated base position) */

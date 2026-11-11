@@ -26,7 +26,7 @@ export default function Home() {
       {/* Pure cinematic opening campsite sequence before website content begins */}
       <div
         id="hero"
-        className="h-[260vh] w-full pointer-events-none"
+        className="h-[260vh] w-full shrink-0 touch-pan-y"
         aria-label="FROSTBYTE Opening Experience"
       />
 
